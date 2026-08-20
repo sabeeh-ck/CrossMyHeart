@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Build Your Crossword | Cross My Heart</title>
+    </head>
+    <body class="bg-bg flex min-h-screen flex-col font-sans">
+        <header class="relative z-10">
+            <nav
+                class="mx-auto flex w-[calc(100%-3rem)] max-w-290 items-center justify-between py-8"
+                aria-label="Primary"
+            >
+                <a
+                    href="/"
+                    class="text-text flex items-center gap-2.5 text-[.9rem] font-bold tracking-[.08em] uppercase no-underline"
+                >
+                    <span
+                        class="bg-accent grid size-9 place-items-center rounded-full text-[#fff8f1]"
+                        ><i data-lucide="heart"></i
+                    ></span>
+                    <span>Cross My Heart</span>
+                </a>
+                <span
+                    class="text-muted text-[.7rem] tracking-widest uppercase max-[800px]:hidden"
+                    >Build a little something personal</span
+                >
+                <div id="theme-dropdown" class="relative w-fit">
+                    <button
+                        id="theme-button"
+                        type="button"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        class="border-border bg-surface text-text hover:border-accent focus:border-focus-ring flex items-center gap-2 border px-3 py-2.5 text-xs shadow-[.3rem_.3rem_0_rgba(169,78,79,.1)] transition focus:outline-none"
+                    >
+                        <i data-lucide="heart" class="text-accent h-4 w-4"></i>
+                        <span>Romantic</span>
+                        <i data-lucide="chevron-down" class="h-3 w-3"></i>
+                    </button>
+                    <div
+                        id="theme-menu"
+                        role="listbox"
+                        class="border-border bg-surface absolute right-0 z-10 mt-2 hidden min-w-full border p-1 shadow-[.4rem_.5rem_0_rgba(42,37,35,.08)]"
+                    >
+                        <button
+                            type="button"
+                            role="option"
+                            data-value="romance"
+                            data-label="Romantic"
+                            data-icon="heart"
+                            class="theme-option text-text hover:bg-bg flex w-full items-center gap-2 px-2 py-2 text-left text-xs"
+                        >
+                            <i data-lucide="heart" class="h-4 w-4"></i>Romantic
+                        </button>
+                        <button
+                            type="button"
+                            role="option"
+                            data-value="birthday"
+                            data-label="Birthday Party"
+                            data-icon="cake"
+                            class="theme-option text-text hover:bg-bg flex w-full items-center gap-2 px-2 py-2 text-left text-xs"
+                        >
+                            <i data-lucide="cake" class="h-4 w-4"></i>Birthday
+                            Party
+                        </button>
+                        <button
+                            type="button"
+                            role="option"
+                            data-value="friendship"
+                            data-label="Best Friends"
+                            data-icon="users"
+                            class="theme-option text-text hover:bg-bg flex w-full items-center gap-2 px-2 py-2 text-left text-xs"
+                        >
+                            <i data-lucide="users" class="h-4 w-4"></i>Best
+                            Friends
+                        </button>
+                        <button
+                            type="button"
+                            role="option"
+                            data-value="general"
+                            data-label="General / Trivia"
+                            data-icon="puzzle"
+                            class="theme-option text-text hover:bg-bg flex w-full items-center gap-2 px-2 py-2 text-left text-xs"
+                        >
+                            <i data-lucide="puzzle" class="h-4 w-4"></i>General
+                            / Trivia
+                        </button>
+                    </div>
+                    <input
+                        type="hidden"
+                        id="theme-selector"
+                        name="theme"
+                        value="romance"
+                    />
+                </div>
+            </nav>
+        </header>
+
+        <main
+            class="relative isolate flex-1 overflow-hidden before:absolute before:inset-0 before:-z-20 before:bg-[linear-gradient(rgba(42,37,35,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(42,37,35,0.045)_1px,transparent_1px)] before:bg-size-[44px_44px]"
+        >
+            <div
+                class="absolute -top-40 -right-40 -z-10 size-100 rounded-full bg-[#f4c8b7] opacity-45"
+            ></div>
+            <div
+                class="absolute -bottom-48 -left-32 -z-10 size-100 rounded-full bg-[#cbd9ca] opacity-45"
+            ></div>
+
+            <div
+                class="mx-auto grid w-[calc(100%-3rem)] max-w-290 grid-cols-[minmax(0,.9fr)_minmax(360px,1.1fr)] items-start gap-12 px-0 pt-12 pb-20 max-[900px]:grid-cols-1 max-[900px]:gap-8 max-[900px]:pt-8"
+            >
+                <section
+                    class="relative border border-[rgba(42,37,35,.13)] bg-[rgba(255,252,247,.7)] px-7 pt-7 pb-8 shadow-[1.5rem_1.5rem_0_rgba(169,78,79,.1)] max-[900px]:px-5"
+                >
+                    <div
+                        class="border-border mb-7 flex items-end justify-between border-b pb-4"
+                    >
+                        <div>
+                            <p
+                                class="text-muted text-[.65rem] tracking-[.12em] uppercase"
+                            >
+                                Your clues
+                            </p>
+                            <h2 class="mt-1 font-serif text-2xl font-normal">
+                                The little details
+                            </h2>
+                        </div>
+                        <span id="word-count" class="text-muted text-xs"
+                            >0 / 10 max</span
+                        >
+                    </div>
+                    <div
+                        id="rows-container"
+                        class="max-h-[52vh] space-y-3 overflow-y-auto pr-2"
+                    ></div>
+                    <div
+                        class="border-border mt-6 flex items-center justify-between gap-4 border-t pt-5"
+                    >
+                        <button
+                            id="add-row-btn"
+                            class="bg-button hover:bg-accent inline-flex items-center gap-2 px-4 py-3 text-xs font-bold text-[#fff8f1] transition hover:-translate-y-0.5"
+                        >
+                            <i data-lucide="plus"></i><span>Add a clue</span>
+                        </button>
+                        <button
+                            id="shuffle-btn"
+                            class="text-muted hover:text-accent inline-flex items-center gap-2 px-2 py-2 text-xs font-bold transition"
+                        >
+                            <i data-lucide="shuffle"></i><span>Reorder</span>
+                        </button>
+                    </div>
+                </section>
+
+                <section
+                    class="bg-surface relative min-h-100 border border-[rgba(42,37,35,.13)] px-7 py-7 shadow-[.8rem_.8rem_0_rgba(203,217,202,.7)] max-[900px]:px-5"
+                >
+                    <div
+                        class="border-border flex items-center justify-between border-b pb-4"
+                    >
+                        <div>
+                            <p
+                                class="text-muted text-[.65rem] tracking-[.12em] uppercase"
+                            >
+                                A glimpse of
+                            </p>
+                            <h2 class="mt-1 font-serif text-2xl font-normal">
+                                Your finished keepsake
+                            </h2>
+                        </div>
+                        <i data-lucide="heart" class="text-accent h-5 w-5"></i>
+                    </div>
+                    <div
+                        id="grid-preview"
+                        class="flex min-h-72 w-full items-center justify-center overflow-auto p-6"
+                    >
+                        <p class="text-muted text-sm italic">
+                            Add words to generate your crossword grid...
+                        </p>
+                    </div>
+                    <button
+                        id="download-pdf-btn"
+                        class="bg-button hover:bg-accent inline-flex w-full items-center justify-center gap-2 py-3 text-xs font-bold text-[#fff8f1] transition hover:-translate-y-0.5"
+                    >
+                        <i data-lucide="download"></i> Download PDF
+                    </button>
+                </section>
+            </div>
+        </main>
+
+        <script type="module" src="/src/main.ts"></script>
+    </body>
+</html>

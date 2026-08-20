@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cross My Heart | Personal Crossword Keepsakes</title>
+    </head>
+    <body class="flex min-h-screen flex-col">
+        <section
+            id="intro-screen"
+            class="bg-bg text-text relative isolate min-h-screen overflow-hidden font-[Georgia,'Times_New_Roman',serif] before:absolute before:inset-0 before:-z-20 before:bg-[linear-gradient(rgba(42,37,35,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(42,37,35,0.045)_1px,transparent_1px)] before:bg-size-[44px_44px]"
+            aria-labelledby="intro-title"
+        >
+            <div
+                class="absolute -top-60 -left-40 -z-10 size-120 rounded-full bg-[#f4c8b7] opacity-55 blur-[2px]"
+            ></div>
+            <div
+                class="absolute -right-48 -bottom-64 -z-10 size-120 rounded-full bg-[#cbd9ca] opacity-55 blur-[2px]"
+            ></div>
+
+            <nav
+                class="mx-auto flex w-[calc(100%-3rem)] max-w-290 items-center justify-between py-8 font-sans"
+                aria-label="Primary"
+            >
+                <a
+                    class="flex items-center gap-2.5 text-[.9rem] font-bold tracking-[.08em] text-inherit uppercase no-underline"
+                    href="#intro-screen"
+                >
+                    <span
+                        class="bg-accent grid size-9 place-items-center rounded-full text-[#fff8f1]"
+                        ><i data-lucide="heart"></i
+                    ></span>
+                    <span>Cross My Heart</span>
+                </a>
+                <div class="flex items-center gap-5">
+                    <span
+                        class="text-muted text-[.7rem] tracking-widest uppercase max-[900px]:hidden"
+                        >A little puzzle, made personal</span
+                    >
+                    <div id="theme-dropdown" class="relative w-fit">
+                        <button
+                            id="theme-button"
+                            type="button"
+                            aria-haspopup="listbox"
+                            aria-expanded="false"
+                            class="border-border bg-surface text-text hover:border-accent focus:border-focus-ring flex items-center gap-2 border px-3 py-2.5 text-xs shadow-[.3rem_.3rem_0_rgba(169,78,79,.1)] transition focus:outline-none"
+                        >
+                            <i
+                                data-lucide="heart"
+                                class="h-4 w-4 text-[#a94e4f]"
+                            ></i>
+                            <span>Romantic</span>
+                            <i data-lucide="chevron-down" class="h-3 w-3"></i>
+                        </button>
+                        <div
+                            id="theme-menu"
+                            role="listbox"
+                            class="border-border bg-surface absolute right-0 z-20 mt-2 hidden min-w-full border p-1 shadow-[.4rem_.5rem_0_rgba(42,37,35,.08)]"
+                        >
+                            <button
+                                type="button"
+                                role="option"
+                                data-value="romance"
+                                data-label="Romantic"
+                                data-icon="heart"
+                                class="theme-option text-text hover:bg-bg flex w-full items-center gap-2 px-2 py-2 text-left text-xs"
+                            >
+                                <i data-lucide="heart" class="h-4 w-4"></i
+                                >Romantic
+                            </button>
+                            <button
+                                type="button"
+                                role="option"
+                                data-value="birthday"
+                                data-label="Birthday Party"
+                                data-icon="cake"
+                                class="theme-option text-text hover:bg-bg flex w-full items-center gap-2 px-2 py-2 text-left text-xs"
+                            >
+                                <i data-lucide="cake" class="h-4 w-4"></i
+                                >Birthday Party
+                            </button>
+                            <button
+                                type="button"
+                                role="option"
+                                data-value="friendship"
+                                data-label="Best Friends"
+                                data-icon="users"
+                                class="theme-option text-text hover:bg-bg flex w-full items-center gap-2 px-2 py-2 text-left text-xs"
+                            >
+                                <i data-lucide="users" class="h-4 w-4"></i>Best
+                                Friends
+                            </button>
+                            <button
+                                type="button"
+                                role="option"
+                                data-value="general"
+                                data-label="General / Trivia"
+                                data-icon="puzzle"
+                                class="theme-option text-text hover:bg-bg flex w-full items-center gap-2 px-2 py-2 text-left text-xs"
+                            >
+                                <i data-lucide="puzzle" class="h-4 w-4"></i
+                                >General / Trivia
+                            </button>
+                        </div>
+                        <input
+                            type="hidden"
+                            id="theme-selector"
+                            name="theme"
+                            value="romance"
+                        />
+                    </div>
+                </div>
+            </nav>
+
+            <div
+                class="mx-auto grid min-h-[calc(100vh-6.5rem)] w-[calc(100%-3rem)] max-w-290 grid-cols-[minmax(0,.9fr)_minmax(360px,1.1fr)] items-center gap-24 px-0 pt-4 pb-20 max-[800px]:grid-cols-1 max-[800px]:gap-12 max-[800px]:pt-12"
+            >
+                <div>
+                    <p
+                        class="text-accent flex items-center gap-2 text-[.72rem] font-bold tracking-[.13em] uppercase"
+                    >
+                        <i data-lucide="sparkles"></i> Made for your favorite
+                        person
+                    </p>
+                    <h1
+                        id="intro-title"
+                        class="my-5 text-[clamp(3.5rem,6.5vw,6.8rem)] leading-[.9] font-normal tracking-[-.055em] max-[800px]:text-[clamp(3.4rem,15vw,5rem)]"
+                    >
+                        Turn your story<br /><em>into a keepsake.</em>
+                    </h1>
+                    <p
+                        class="text-muted max-w-lg font-sans text-[1.05rem] leading-[1.7]"
+                    >
+                        Build a crossword from the places, phrases, and tiny
+                        details that mean the most. A thoughtful surprise is
+                        only a few clues away.
+                    </p>
+                    <a
+                        href="/builder.html"
+                        class="bg-button hover:bg-accent mt-6 inline-flex items-center gap-2.5 rounded-full px-6 py-4 font-sans text-[.82rem] font-bold text-[#fff8f1] no-underline transition duration-180 hover:-translate-y-0.5"
+                    >
+                        Start building <i data-lucide="arrow-up-right"></i>
+                    </a>
+                    <p
+                        class="mt-5 flex items-center gap-1.5 font-sans text-[.72rem] text-[#978b84]"
+                    >
+                        <i data-lucide="lock-keyhole"></i> Your clues stay right
+                        here in your browser
+                    </p>
+                </div>
+
+                <div
+                    class="relative min-h-124 rotate-2 border border-[rgba(42,37,35,.13)] bg-[rgba(255,252,247,.48)] px-10 pt-12 pb-9 shadow-[1.5rem_1.5rem_0_rgba(169,78,79,.1)] max-[800px]:min-h-92"
+                    aria-label="A sample crossword made from personal memories"
+                    role="img"
+                >
+                    <div
+                        class="flex justify-between font-sans text-[.65rem] tracking-[.12em] text-[#978b84] uppercase"
+                    >
+                        <span>our story</span><span>01 / 03</span>
+                    </div>
+                    <div
+                        class="absolute top-28 -right-8 flex rotate-[7deg] items-center gap-2 border border-[#ddcfc5] bg-[#fffaf4] px-3 py-2.5 font-sans text-[.7rem] text-[#685d58] shadow-[.4rem_.5rem_0_rgba(42,37,35,.06)] max-[800px]:right-2"
+                    >
+                        <i data-lucide="map-pin"></i><span>first date</span>
+                    </div>
+                    <div
+                        class="absolute bottom-20 -left-8 flex rotate-[-8deg] items-center gap-2 border border-[#ddcfc5] bg-[#fffaf4] px-3 py-2.5 font-sans text-[.7rem] text-[#685d58] shadow-[.4rem_.5rem_0_rgba(42,37,35,.06)] max-[800px]:left-2"
+                    >
+                        <i data-lucide="coffee"></i><span>slow mornings</span>
+                    </div>
+                    <div
+                        class="mx-auto my-14 grid w-full max-w-100 -rotate-2 grid-cols-6 gap-1.5"
+                    >
+                        <span
+                            class="grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold text-[#fff8f1]"
+                            >C</span
+                        ><span
+                            class="grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold text-[#fff8f1]"
+                            >O</span
+                        ><span
+                            class="grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold text-[#fff8f1]"
+                            >F</span
+                        ><span
+                            class="text-grid-cell-text grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold"
+                            >F</span
+                        ><span
+                            class="text-grid-cell-text grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold"
+                            >E</span
+                        ><span
+                            class="text-grid-cell-text grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold"
+                            >E</span
+                        >
+                        <span class="aspect-square"></span
+                        ><span
+                            class="grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold text-[#fff8f1]"
+                            >O</span
+                        ><span class="aspect-square"></span
+                        ><span
+                            class="grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold text-[#fff8f1]"
+                            >N</span
+                        ><span class="aspect-square"></span
+                        ><span class="aspect-square"></span>
+                        <span class="aspect-square"></span
+                        ><span
+                            class="grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold text-[#fff8f1]"
+                            >V</span
+                        ><span class="aspect-square"></span
+                        ><span
+                            class="grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold text-[#fff8f1]"
+                            >I</span
+                        ><span class="aspect-square"></span
+                        ><span class="aspect-square"></span>
+                        <span
+                            class="grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold text-[#fff8f1]"
+                            >H</span
+                        ><span
+                            class="grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold text-[#fff8f1]"
+                            >O</span
+                        ><span
+                            class="grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold text-[#fff8f1]"
+                            >N</span
+                        ><span
+                            class="grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold text-[#fff8f1]"
+                            >E</span
+                        ><span
+                            class="grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold text-[#fff8f1]"
+                            >Y</span
+                        ><span class="aspect-square"></span>
+                    </div>
+                    <div
+                        class="flex items-center justify-between font-sans text-[.65rem] text-[#978b84]"
+                    >
+                        <span>Clues only you two know.</span
+                        ><i data-lucide="heart"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script type="module" src="/src/main.ts"></script>
+    </body>
+</html>

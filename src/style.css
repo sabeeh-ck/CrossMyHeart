@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@theme {
+    --color-bg: #f8f1e8;
+    --color-surface: #fffaf4;
+    --color-border: #ddcfc5;
+    --color-text: #2a2523;
+    --color-muted: #817571;
+    --color-accent: #a94e4f;
+    --color-accent-strong: #a94e4f;
+    --color-accent-soft: #c97976;
+    --color-focus-ring: #a94e4f;
+    --color-grid-cell-border: #a94e4f;
+    --color-grid-cell-text: #fff8f1;
+    --color-button: #2a2523;
+}
+
+:root {
+    color-scheme: light;
+    --color-bg: #f8f1e8;
+    --color-surface: #fffaf4;
+    --color-border: #ddcfc5;
+    --color-muted: #817571;
+    --color-text: #2a2523;
+    --color-accent: #a94e4f;
+    --color-accent-strong: #a94e4f;
+    --color-accent-soft: #c97976;
+    --color-focus-ring: #a94e4f;
+    --color-grid-cell-border: #a94e4f;
+    --color-grid-cell-text: #fff8f1;
+    --color-button: #2a2523;
+}
+
+[data-theme="birthday"] {
+    --color-bg: #171007;
+    --color-surface: #24180a;
+    --color-border: #5b4216;
+    --color-text: #fff8e1;
+    --color-muted: #d6bd7d;
+    --color-accent: #fbbf24;
+    --color-accent-strong: #d97706;
+    --color-accent-soft: #fde68a;
+    --color-focus-ring: #fbbf24;
+    --color-grid-cell-border: #70521a;
+    --color-grid-cell-text: #fde68a;
+}
+
+[data-theme="friendship"] {
+    --color-bg: #0b1020;
+    --color-surface: #131a31;
+    --color-border: #29375f;
+    --color-text: #f1f5ff;
+    --color-muted: #aebbe0;
+    --color-accent: #818cf8;
+    --color-accent-strong: #4f46e5;
+    --color-accent-soft: #c7d2fe;
+    --color-focus-ring: #818cf8;
+    --color-grid-cell-border: #43588e;
+    --color-grid-cell-text: #c7d2fe;
+}
+
+[data-theme="general"] {
+    --color-bg: #061412;
+    --color-surface: #0c211d;
+    --color-border: #1e5146;
+    --color-text: #ecfdf5;
+    --color-muted: #9ac8b9;
+    --color-accent: #34d399;
+    --color-accent-strong: #059669;
+    --color-accent-soft: #a7f3d0;
+    --color-focus-ring: #34d399;
+    --color-grid-cell-border: #327966;
+    --color-grid-cell-text: #a7f3d0;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    accent-color: var(--color-accent);
+    transition:
+        background-color 220ms ease,
+        color 220ms ease;
+}
+
+::selection {
+    background: var(--color-accent-strong);
+    color: #ffffff;
+}
