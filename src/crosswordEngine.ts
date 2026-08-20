@@ -48,8 +48,6 @@ export function generateLayout(items: CrosswordItem[]): PlacedWord[] {
                     break;
                 }
             } else {
-                // Check orthogonal neighbors to prevent illegal parallel sticking (clumping)
-                // (A human leaves a 1-cell gap between parallel words)
                 const orthogonalNeighbors = [
                     { x: x + 1, y },
                     { x: x - 1, y },
@@ -57,9 +55,7 @@ export function generateLayout(items: CrosswordItem[]): PlacedWord[] {
                     { x, y: y - 1 },
                 ];
 
-                // Ensure we don't accidentally touch a parallel word head-to-head or side-by-side
                 for (const n of orthogonalNeighbors) {
-                    // Skip checking cells that are part of our *own* current word being placed
                     const isOwnWord =
                         (orientation === "across" &&
                             n.y === startY &&

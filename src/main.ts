@@ -1,10 +1,7 @@
-import "./style.css";
 import { generateLayout, type CrosswordItem } from "./crosswordEngine";
 import {
     createIcons,
     Plus,
-    Trash2,
-    Download,
     Shuffle,
     Heart,
     Sparkles,
@@ -17,6 +14,11 @@ import {
     Users,
     Puzzle,
     X,
+    ShieldLock,
+    Gem,
+    Baby,
+    GraduationCap,
+    PartyPopper,
 } from "lucide";
 
 // Initial starting state for the couple
@@ -103,39 +105,20 @@ const renderRows = () => {
     updateGridPreview();
 };
 
-const themes = {
-    romance: {
-        title: "💕 Our Love Story Crossword",
-        accent: "text-rose-400",
-        border: "focus:border-rose-500",
-        button: "bg-rose-600 hover:bg-rose-500 shadow-rose-600/20",
-    },
-    birthday: {
-        title: "🎂 Happy Birthday Crossword",
-        accent: "text-amber-400",
-        border: "focus:border-amber-500",
-        button: "bg-amber-600 hover:bg-amber-500 shadow-amber-600/20",
-    },
-    friendship: {
-        title: "🌟 Besties Crossword Puzzle",
-        accent: "text-indigo-400",
-        border: "focus:border-indigo-500",
-        button: "bg-indigo-600 hover:bg-indigo-500 shadow-indigo-600/20",
-    },
-    general: {
-        title: "🧩 Custom Crossword Builder",
-        accent: "text-emerald-400",
-        border: "focus:border-emerald-500",
-        button: "bg-emerald-600 hover:bg-emerald-500 shadow-emerald-600/20",
-    },
-};
+const themes = new Set([
+    "romance",
+    "birthday",
+    "wedding",
+    "baby-shower",
+    "graduation",
+    "celebration",
+]);
 
 createIcons({
     icons: {
+        ShieldLock,
         Plus,
-        Trash2,
         Heart,
-        Download,
         Shuffle,
         Sparkles,
         ArrowUpRight,
@@ -147,11 +130,15 @@ createIcons({
         Users,
         Puzzle,
         X,
+        Gem,
+        Baby,
+        GraduationCap,
+        PartyPopper,
     },
 });
 
 const updateTheme = (themeKey: string) => {
-    if (!(themeKey in themes)) return;
+    if (!themes.has(themeKey)) return;
 
     document.documentElement.setAttribute("data-theme", themeKey);
     if (themeSelector) themeSelector.value = themeKey;
@@ -164,10 +151,22 @@ const updateTheme = (themeKey: string) => {
     const iconEl = themeButton?.querySelector("svg");
     if (labelEl && selectedOption) {
         labelEl.textContent = selectedOption.dataset.label || "Theme";
+        labelEl.classList = "text-accent";
     }
+
     if (iconEl && selectedOption) {
-        iconEl.outerHTML = `<i data-lucide="${selectedOption.dataset.icon}"></i>`;
-        createIcons({ icons: { Heart, Cake, Users, Puzzle, ChevronDown } });
+        iconEl.outerHTML = `<i data-lucide="${selectedOption.dataset.icon}" class="size-4 text-accent"></i>`;
+        createIcons({
+            icons: {
+                Heart,
+                Cake,
+                Gem,
+                Baby,
+                GraduationCap,
+                PartyPopper,
+                ChevronDown,
+            },
+        });
     }
 
     menu?.classList.add("hidden");
@@ -197,7 +196,6 @@ updateTheme(
         "romance",
 );
 
-// Renders the calculated layout onto a visual CSS Grid
 const updateGridPreview = () => {
     if (!gridPreview) return;
     const validItems = items.filter((i) => i.answer.trim().length > 0);
@@ -209,7 +207,6 @@ const updateGridPreview = () => {
 
     const placedWords = generateLayout(validItems);
 
-    // Find dimensions of the board
     let maxCol = 0;
     let maxRow = 0;
     placedWords.forEach((pw) => {
@@ -225,7 +222,6 @@ const updateGridPreview = () => {
         if (endRow > maxRow) maxRow = endRow;
     });
 
-    // Build a 2D map representation of the cells
     const gridMatrix: { [key: string]: string } = {};
     placedWords.forEach((pw) => {
         for (let i = 0; i < pw.word.length; i++) {
@@ -235,14 +231,13 @@ const updateGridPreview = () => {
         }
     });
 
-    // Generate HTML table/grid
     let html = `<div class="grid gap-1.5" style="grid-template-columns: repeat(${maxCol}, minmax(0, 1fr));">`;
 
     for (let y = 0; y < maxRow; y++) {
         for (let x = 0; x < maxCol; x++) {
             const char = gridMatrix[`${x},${y}`];
             if (char) {
-                html += `<div class="flex h-9 w-9 items-center justify-center border border-grid-cell-border bg-accent font-serif text-sm font-bold text-grid-cell-text">${char}</div>`;
+                html += `<div class="flex h-9 w-9 items-center justify-center border border-border bg-accent font-serif text-sm font-bold text-grid-cell-text">${char}</div>`;
             } else {
                 html += `<div class="h-9 w-9"></div>`;
             }
@@ -253,7 +248,6 @@ const updateGridPreview = () => {
     gridPreview.innerHTML = html;
 };
 
-// Event Listeners for inputs
 rowsContainer?.addEventListener("input", (e) => {
     const target = e.target as HTMLInputElement;
     if (!target) return;

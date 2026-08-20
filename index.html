@@ -4,6 +4,14 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Cross My Heart | Personal Crossword Keepsakes</title>
+        <link rel="icon" type="image/svg+xml" href="./src/assets/logo.svg" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Parisienne&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/src/style.css" />
     </head>
     <body class="flex min-h-screen flex-col">
         <section
@@ -61,45 +69,78 @@
                                 type="button"
                                 role="option"
                                 data-value="romance"
-                                data-label="Romantic"
+                                data-label="Romance"
                                 data-icon="heart"
-                                class="theme-option text-text hover:bg-bg flex w-full items-center gap-2 px-2 py-2 text-left text-xs"
+                                class="theme-option hover:bg-bg flex w-full items-center gap-2 rounded-sm p-2 text-left text-xs text-[#7a263a]"
                             >
-                                <i data-lucide="heart" class="h-4 w-4"></i
-                                >Romantic
+                                <i data-lucide="heart" class="size-4"></i>
+                                <span>Romance</span>
                             </button>
+
                             <button
                                 type="button"
                                 role="option"
                                 data-value="birthday"
-                                data-label="Birthday Party"
+                                data-label="Birthday"
                                 data-icon="cake"
-                                class="theme-option text-text hover:bg-bg flex w-full items-center gap-2 px-2 py-2 text-left text-xs"
+                                class="theme-option hover:bg-bg flex w-full items-center gap-2 rounded-sm p-2 text-left text-xs text-[#e85d4a]"
                             >
-                                <i data-lucide="cake" class="h-4 w-4"></i
-                                >Birthday Party
+                                <i data-lucide="cake" class="size-4"></i>
+                                <span>Birthday</span>
                             </button>
+
                             <button
                                 type="button"
                                 role="option"
-                                data-value="friendship"
-                                data-label="Best Friends"
-                                data-icon="users"
-                                class="theme-option text-text hover:bg-bg flex w-full items-center gap-2 px-2 py-2 text-left text-xs"
+                                data-value="wedding"
+                                data-label="Wedding"
+                                data-icon="gem"
+                                class="theme-option hover:bg-bg flex w-full items-center gap-2 rounded-sm p-2 text-left text-xs text-[#c9a96e]"
                             >
-                                <i data-lucide="users" class="h-4 w-4"></i>Best
-                                Friends
+                                <i data-lucide="gem" class="size-4"></i>
+                                <span>Wedding</span>
                             </button>
+
                             <button
                                 type="button"
                                 role="option"
-                                data-value="general"
-                                data-label="General / Trivia"
-                                data-icon="puzzle"
-                                class="theme-option text-text hover:bg-bg flex w-full items-center gap-2 px-2 py-2 text-left text-xs"
+                                data-value="baby-shower"
+                                data-label="Baby Shower"
+                                data-icon="baby"
+                                class="theme-option hover:bg-bg flex w-full items-center gap-2 rounded-sm p-2 text-left text-xs text-[#76BBD3]"
                             >
-                                <i data-lucide="puzzle" class="h-4 w-4"></i
-                                >General / Trivia
+                                <i data-lucide="baby" class="size-4"></i>
+                                <span>Baby Shower</span>
+                            </button>
+
+                            <button
+                                type="button"
+                                role="option"
+                                data-value="graduation"
+                                data-label="Graduation"
+                                data-icon="graduation-cap"
+                                class="theme-option hover:bg-bg flex w-full items-center gap-2 rounded-sm p-2 text-left text-xs text-[#23395D]"
+                            >
+                                <i
+                                    data-lucide="graduation-cap"
+                                    class="size-4"
+                                ></i>
+                                <span>Graduation</span>
+                            </button>
+
+                            <button
+                                type="button"
+                                role="option"
+                                data-value="celebration"
+                                data-label="Celebration"
+                                data-icon="party-popper"
+                                class="theme-option hover:bg-bg flex w-full items-center gap-2 rounded-sm p-2 text-left text-xs text-[#285943]"
+                            >
+                                <i
+                                    data-lucide="party-popper"
+                                    class="size-4"
+                                ></i>
+                                <span>Celebration</span>
                             </button>
                         </div>
                         <input

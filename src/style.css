@@ -1,76 +1,80 @@
 @import "tailwindcss";
 
 @theme {
-    --color-bg: #f8f1e8;
-    --color-surface: #fffaf4;
-    --color-border: #ddcfc5;
-    --color-text: #2a2523;
-    --color-muted: #817571;
-    --color-accent: #a94e4f;
-    --color-accent-strong: #a94e4f;
-    --color-accent-soft: #c97976;
-    --color-focus-ring: #a94e4f;
-    --color-grid-cell-border: #a94e4f;
+    --color-bg: #fff8f0;
+    --color-surface: #fffcfa;
+    --color-border: #e9d6d8;
+    --color-text: #33232b;
+    --color-muted: #876f76;
+    --color-accent: #7a263a;
+    --color-accent-text: #ffffff;
+    --color-accent-hover: #5f1d2d;
     --color-grid-cell-text: #fff8f1;
-    --color-button: #2a2523;
+    --font-sans: "DM Sans", sans-serif;
+    --font-serif: "Cormorant Garamond", serif;
+    --font-logo: "Parisienne", cursive;
 }
 
 :root {
     color-scheme: light;
-    --color-bg: #f8f1e8;
-    --color-surface: #fffaf4;
-    --color-border: #ddcfc5;
-    --color-muted: #817571;
-    --color-text: #2a2523;
-    --color-accent: #a94e4f;
     --color-accent-strong: #a94e4f;
-    --color-accent-soft: #c97976;
     --color-focus-ring: #a94e4f;
     --color-grid-cell-border: #a94e4f;
-    --color-grid-cell-text: #fff8f1;
-    --color-button: #2a2523;
 }
 
 [data-theme="birthday"] {
-    --color-bg: #171007;
-    --color-surface: #24180a;
-    --color-border: #5b4216;
-    --color-text: #fff8e1;
-    --color-muted: #d6bd7d;
-    --color-accent: #fbbf24;
-    --color-accent-strong: #d97706;
-    --color-accent-soft: #fde68a;
-    --color-focus-ring: #fbbf24;
-    --color-grid-cell-border: #70521a;
-    --color-grid-cell-text: #fde68a;
+    --color-bg: #fff7e8;
+    --color-border: #f0dcc4;
+    --color-text: #29252a;
+    --color-muted: #806f68;
+    --color-accent: #e85d4a;
+    --color-accent-hover: #c94738;
+    --color-surface: #fffdf8;
+    --color-accent-text: #fff7e8;
 }
 
-[data-theme="friendship"] {
-    --color-bg: #0b1020;
-    --color-surface: #131a31;
-    --color-border: #29375f;
-    --color-text: #f1f5ff;
-    --color-muted: #aebbe0;
-    --color-accent: #818cf8;
-    --color-accent-strong: #4f46e5;
-    --color-accent-soft: #c7d2fe;
-    --color-focus-ring: #818cf8;
-    --color-grid-cell-border: #43588e;
-    --color-grid-cell-text: #c7d2fe;
+[data-theme="wedding"] {
+    --color-bg: #fffdf7;
+    --color-accent: #c9a96e;
+    --color-text: #342b2b;
+    --color-muted: #82766d;
+    --color-border: #e9dfc9;
+    --color-accent-hover: #aa894f;
+    --color-surface: #ffffff;
+    --color-accent-text: #fffdf7;
 }
 
-[data-theme="general"] {
-    --color-bg: #061412;
-    --color-surface: #0c211d;
-    --color-border: #1e5146;
-    --color-text: #ecfdf5;
-    --color-muted: #9ac8b9;
-    --color-accent: #34d399;
-    --color-accent-strong: #059669;
-    --color-accent-soft: #a7f3d0;
-    --color-focus-ring: #34d399;
-    --color-grid-cell-border: #327966;
-    --color-grid-cell-text: #a7f3d0;
+[data-theme="baby-shower"] {
+    --color-bg: #edf8fa;
+    --color-accent: #76bbd3;
+    --color-text: #30424a;
+    --color-muted: #71858c;
+    --color-border: #d1e8ec;
+    --color-accent-hover: #559eb8;
+    --color-surface: #f9feff;
+    --color-accent-text: #30424a;
+}
+
+[data-theme="graduation"] {
+    --color-bg: #edf2f8;
+    --color-accent: #23395d;
+    --color-text: #18202c;
+    --color-muted: #697586;
+    --color-border: #d5deea;
+    --color-accent-hover: #172a47;
+    --color-surface: #f9fbfe;
+    --color-accent-text: #ffffff;
+}
+
+[data-theme="celebration"] {
+    --color-bg: #fff9f0;
+    --color-accent: #285943;
+    --color-text: #23332a;
+    --color-muted: #6f7e73;
+    --color-border: #d8e3d9;
+    --color-accent-hover: #1c4532;
+    --color-surface: #fffdf9;
+    --color-accent-text: #ffffff;
 }
 
 body {
@@ -80,6 +84,7 @@ body {
     transition:
         background-color 220ms ease,
         color 220ms ease;
+    @apply font-sans;
 }
 
 ::selection {
