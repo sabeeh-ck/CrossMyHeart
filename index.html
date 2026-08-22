@@ -13,29 +13,20 @@
         />
         <link rel="stylesheet" href="/src/style.css" />
     </head>
-    <body class="flex min-h-screen flex-col">
-        <section
-            id="intro-screen"
-            class="bg-bg text-text relative isolate min-h-screen overflow-hidden font-[Georgia,'Times_New_Roman',serif] before:absolute before:inset-0 before:-z-20 before:bg-[linear-gradient(rgba(42,37,35,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(42,37,35,0.045)_1px,transparent_1px)] before:bg-size-[44px_44px]"
-            aria-labelledby="intro-title"
-        >
-            <div
-                class="absolute -top-60 -left-40 -z-10 size-120 rounded-full bg-[#f4c8b7] opacity-55 blur-[2px]"
-            ></div>
-            <div
-                class="absolute -right-48 -bottom-64 -z-10 size-120 rounded-full bg-[#cbd9ca] opacity-55 blur-[2px]"
-            ></div>
-
+    <body
+        class="min-h-screen before:absolute before:inset-0 before:-z-20 before:bg-[linear-gradient(rgba(42,37,35,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(42,37,35,0.045)_1px,transparent_1px)] before:bg-size-[44px_44px]"
+    >
+        <header>
             <nav
-                class="mx-6 flex max-w-290 items-center justify-between py-8 md:mx-auto"
+                class="mx-6 flex max-w-6xl items-center justify-between py-8 lg:mx-auto lg:gap-4"
                 aria-label="Primary"
             >
                 <a
-                    class="font-logo flex items-center gap-2 text-base font-black text-inherit no-underline md:gap-4 md:text-3xl"
+                    class="font-logo flex items-center gap-2 no-underline lg:gap-4"
                     href="#intro-screen"
                 >
                     <span
-                        class="bg-accent text-grid-cell-text grid size-9 place-items-center rounded-full"
+                        class="bg-accent text-accent-text grid size-9 place-items-center rounded-full"
                     >
                         <svg
                             width="18"
@@ -50,33 +41,42 @@
                             />
                         </svg>
                     </span>
-                    <span class="text-accent">Cross My Heart.</span>
+                    <span class="text-accent text-base font-black lg:text-3xl"
+                        >Cross My Heart.</span
+                    >
                 </a>
 
-                <div class="flex items-center gap-5">
-                    <span
-                        class="text-muted text-[.7rem] tracking-widest uppercase max-[900px]:hidden"
-                        >A little puzzle, made personal</span
+                <div
+                    class="flex items-center justify-between gap-3 sm:justify-end md:gap-5"
+                >
+                    <a
+                        href="/builder.html"
+                        class="bg-accent hover:bg-accent-hover text-accent-text hidden items-center gap-2 rounded-lg px-4 py-2 text-xs font-bold transition duration-180 active:scale-95 lg:inline-flex lg:hover:-translate-y-0.5"
                     >
+                        Create yours
+                        <i data-lucide="arrow-up-right" class="size-5"></i>
+                    </a>
+
                     <div id="theme-dropdown" class="relative w-fit">
                         <button
                             id="theme-button"
                             type="button"
                             aria-haspopup="listbox"
                             aria-expanded="false"
-                            class="border-border bg-surface text-text hover:border-accent focus:border-focus-ring flex items-center gap-2 border px-3 py-2.5 text-xs shadow-[.3rem_.3rem_0_rgba(169,78,79,.1)] transition focus:outline-none"
+                            class="border-border bg-surface text-text hover:border-accent focus:border-focus-ring flex items-center gap-2 rounded-md border px-3 py-2.5 text-xs transition focus:outline-none"
                         >
                             <i
                                 data-lucide="heart"
-                                class="h-4 w-4 text-[#a94e4f]"
+                                class="text-accent size-3"
                             ></i>
-                            <span>Romantic</span>
-                            <i data-lucide="chevron-down" class="h-3 w-3"></i>
+                            <span>Romance</span>
+                            <i data-lucide="chevron-down" class="size-3"></i>
                         </button>
+
                         <div
                             id="theme-menu"
                             role="listbox"
-                            class="border-border bg-surface absolute right-0 z-20 mt-2 hidden min-w-full border p-1 shadow-[.4rem_.5rem_0_rgba(42,37,35,.08)]"
+                            class="border-border bg-surface absolute right-0 z-20 mt-2 hidden min-w-full rounded-xl border p-1"
                         >
                             <button
                                 type="button"
@@ -156,6 +156,7 @@
                                 <span>Celebration</span>
                             </button>
                         </div>
+
                         <input
                             type="hidden"
                             id="theme-selector"
@@ -165,132 +166,235 @@
                     </div>
                 </div>
             </nav>
-
-            <div
-                class="mx-auto grid min-h-[calc(100vh-6.5rem)] w-[calc(100%-3rem)] max-w-290 grid-cols-[minmax(0,.9fr)_minmax(360px,1.1fr)] items-center gap-24 px-0 pt-4 pb-20 max-[800px]:grid-cols-1 max-[800px]:gap-12 max-[800px]:pt-12"
+        </header>
+        <main class="mx-6 flex max-w-6xl flex-col gap-10 lg:mx-auto lg:gap-4">
+            <section
+                id="intro-screen"
+                class="relative grid grid-cols-1 items-center gap-8 lg:h-[calc(100vh-10rem)] lg:grid-cols-2 lg:gap-0"
+                aria-labelledby="intro-title"
             >
-                <div>
+                <div
+                    id="hero"
+                    class="flex h-[calc(100vh-14rem)] flex-col items-start justify-end gap-6 lg:h-auto"
+                >
                     <p
-                        class="text-accent flex items-center gap-2 text-[.72rem] font-bold tracking-[.13em] uppercase"
+                        class="text-accent inline-flex items-center gap-2 font-serif text-xs font-black uppercase italic lg:text-sm"
                     >
-                        <i data-lucide="sparkles"></i> Made for your favorite
-                        person
+                        <i data-lucide="sparkles" class="size-4 lg:size-5"></i>
+                        <span>
+                            A personalized puzzle for a special moment
+                        </span>
                     </p>
-                    <h1
-                        id="intro-title"
-                        class="my-5 text-[clamp(3.5rem,6.5vw,6.8rem)] leading-[.9] font-normal tracking-[-.055em] max-[800px]:text-[clamp(3.4rem,15vw,5rem)]"
-                    >
-                        Turn your story<br /><em>into a keepsake.</em>
-                    </h1>
+
+                    <div class="flex flex-col items-start gap-3">
+                        <h1
+                            id="intro-title"
+                            class="font-serif text-4xl font-medium tracking-tight lg:text-6xl"
+                        >
+                            Create a crossword<br /><em class="font-bold"
+                                >made just for them.</em
+                            >
+                        </h1>
+
+                        <p
+                            class="text-muted text-sm leading-relaxed lg:text-base"
+                        >
+                            Turn memories, inside jokes, favorite things, and
+                            meaningful moments into a personalized crossword
+                            puzzle. Choose a theme, add your clues and answers,
+                            and download a beautiful printable PDF.
+                        </p>
+
+                        <a
+                            href="/builder.html"
+                            class="bg-accent lg:hover:bg-accent-hover text-accent-text active:bg-accent-hover inline-flex items-center gap-2 rounded-xl px-4 py-3 text-xs font-bold no-underline transition duration-200 active:scale-95 lg:text-sm lg:hover:-translate-y-0.5"
+                        >
+                            Create yours for free
+                            <i data-lucide="arrow-up-right" class="size-5"></i>
+                        </a>
+                    </div>
+
                     <p
-                        class="text-muted max-w-lg font-sans text-[1.05rem] leading-[1.7]"
+                        class="flex flex-col items-start gap-2 text-xs lg:text-sm"
                     >
-                        Build a crossword from the places, phrases, and tiny
-                        details that mean the most. A thoughtful surprise is
-                        only a few clues away.
-                    </p>
-                    <a
-                        href="/builder.html"
-                        class="bg-button hover:bg-accent mt-6 inline-flex items-center gap-2.5 rounded-full px-6 py-4 font-sans text-[.82rem] font-bold text-[#fff8f1] no-underline transition duration-180 hover:-translate-y-0.5"
-                    >
-                        Start building <i data-lucide="arrow-up-right"></i>
-                    </a>
-                    <p
-                        class="mt-5 flex items-center gap-1.5 font-sans text-[.72rem] text-[#978b84]"
-                    >
-                        <i data-lucide="lock-keyhole"></i> Your clues stay right
-                        here in your browser
+                        <span class="flex items-center gap-2 font-semibold">
+                            <i
+                                data-lucide="shield-lock"
+                                class="size-4 lg:size-5"
+                            ></i>
+                            <span>Your puzzles stay private</span>
+                        </span>
+                        <span class="text-muted">
+                            Everything is created and processed right in your
+                            browser. We don’t collect, store, or transmit your
+                            puzzle data. Your clues, answers, and event details
+                            stay on your device.
+                        </span>
                     </p>
                 </div>
 
                 <div
-                    class="relative min-h-124 rotate-2 border border-[rgba(42,37,35,.13)] bg-[rgba(255,252,247,.48)] px-10 pt-12 pb-9 shadow-[1.5rem_1.5rem_0_rgba(169,78,79,.1)] max-[800px]:min-h-92"
+                    class="relative min-h-124 rotate-2 border border-[rgba(42,37,35,.13)] bg-[rgba(255,252,247,.48)] px-6 pt-12 pb-9 shadow-[1.5rem_1.5rem_0_rgba(169,78,79,.1)] max-[800px]:min-h-92 sm:px-10"
                     aria-label="A sample crossword made from personal memories"
                     role="img"
                 >
                     <div
-                        class="flex justify-between font-sans text-[.65rem] tracking-[.12em] text-[#978b84] uppercase"
+                        class="flex justify-between text-[.65rem] tracking-[.12em] text-[#978b84] uppercase"
                     >
                         <span>our story</span><span>01 / 03</span>
                     </div>
                     <div
-                        class="absolute top-28 -right-8 flex rotate-[7deg] items-center gap-2 border border-[#ddcfc5] bg-[#fffaf4] px-3 py-2.5 font-sans text-[.7rem] text-[#685d58] shadow-[.4rem_.5rem_0_rgba(42,37,35,.06)] max-[800px]:right-2"
+                        class="border-border bg-surface absolute top-28 -right-8 flex rotate-[7deg] items-center gap-2 border px-3 py-2.5 text-[.7rem] text-[#685d58] shadow-[.4rem_.5rem_0_rgba(42,37,35,.06)] max-[800px]:top-20 max-[800px]:right-2"
                     >
                         <i data-lucide="map-pin"></i><span>first date</span>
                     </div>
+
                     <div
-                        class="absolute bottom-20 -left-8 flex rotate-[-8deg] items-center gap-2 border border-[#ddcfc5] bg-[#fffaf4] px-3 py-2.5 font-sans text-[.7rem] text-[#685d58] shadow-[.4rem_.5rem_0_rgba(42,37,35,.06)] max-[800px]:left-2"
+                        class="border-border bg-surface absolute bottom-20 -left-8 flex rotate-[-8deg] items-center gap-2 border px-3 py-2.5 text-[.7rem] text-[#685d58] shadow-[.4rem_.5rem_0_rgba(42,37,35,.06)] max-[800px]:bottom-14 max-[800px]:left-2"
                     >
                         <i data-lucide="coffee"></i><span>slow mornings</span>
                     </div>
                     <div
-                        class="mx-auto my-14 grid w-full max-w-100 -rotate-2 grid-cols-6 gap-1.5"
-                    >
-                        <span
-                            class="grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold text-[#fff8f1]"
-                            >C</span
-                        ><span
-                            class="grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold text-[#fff8f1]"
-                            >O</span
-                        ><span
-                            class="grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold text-[#fff8f1]"
-                            >F</span
-                        ><span
-                            class="text-grid-cell-text grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold"
-                            >F</span
-                        ><span
-                            class="text-grid-cell-text grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold"
-                            >E</span
-                        ><span
-                            class="text-grid-cell-text grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold"
-                            >E</span
-                        >
-                        <span class="aspect-square"></span
-                        ><span
-                            class="grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold text-[#fff8f1]"
-                            >O</span
-                        ><span class="aspect-square"></span
-                        ><span
-                            class="grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold text-[#fff8f1]"
-                            >N</span
-                        ><span class="aspect-square"></span
-                        ><span class="aspect-square"></span>
-                        <span class="aspect-square"></span
-                        ><span
-                            class="grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold text-[#fff8f1]"
-                            >V</span
-                        ><span class="aspect-square"></span
-                        ><span
-                            class="grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold text-[#fff8f1]"
-                            >I</span
-                        ><span class="aspect-square"></span
-                        ><span class="aspect-square"></span>
-                        <span
-                            class="grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold text-[#fff8f1]"
-                            >H</span
-                        ><span
-                            class="grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold text-[#fff8f1]"
-                            >O</span
-                        ><span
-                            class="grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold text-[#fff8f1]"
-                            >N</span
-                        ><span
-                            class="grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold text-[#fff8f1]"
-                            >E</span
-                        ><span
-                            class="grid aspect-square place-items-center border border-[#a94e4f] bg-[#a94e4f] font-serif text-[clamp(1rem,3vw,1.65rem)] font-bold text-[#fff8f1]"
-                            >Y</span
-                        ><span class="aspect-square"></span>
-                    </div>
-                    <div
-                        class="flex items-center justify-between font-sans text-[.65rem] text-[#978b84]"
+                        class="flex items-center justify-between text-[.65rem] text-[#978b84]"
                     >
                         <span>Clues only you two know.</span
                         ><i data-lucide="heart"></i>
                     </div>
                 </div>
+            </section>
+
+            <section class="mt-6 flex w-full flex-col gap-4">
+                <div class="flex flex-col gap-4">
+                    <h2
+                        class="text-accent text-sm font-bold uppercase lg:text-lg"
+                    >
+                        How it works
+                    </h2>
+                    <ol class="flex flex-col gap-6 text-sm lg:text-base">
+                        <li>
+                            <p
+                                class="inline-flex items-center gap-2 font-serif text-xl font-black italic"
+                            >
+                                <i data-lucide="swatch-book" class="size-5"></i>
+                                Choose a theme
+                            </p>
+                            <p class="ml-7">
+                                Pick a style that matches your occasion.
+                            </p>
+                        </li>
+                        <li>
+                            <p
+                                class="inline-flex items-center gap-2 font-serif text-xl font-black italic"
+                            >
+                                <i data-lucide="pencil-line" class="size-5"></i>
+                                Add your clues and answers
+                            </p>
+                            <p class="ml-7">
+                                Turn names, memories, and inside jokes into
+                                clues.
+                            </p>
+                        </li>
+                        <li>
+                            <p
+                                class="inline-flex items-center gap-2 font-serif text-xl font-black italic"
+                            >
+                                <i data-lucide="file-down" class="size-5"></i>
+                                Create and download
+                            </p>
+                            <p class="ml-7">
+                                Generate your crossword and dowload it as pdf
+                                for your special event.
+                            </p>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-surface mt-12 pt-12 pb-6">
+            <div class="mx-6 flex max-w-6xl flex-col gap-6 lg:mx-auto">
+                <div class="flex items-center gap-2">
+                    <a
+                        class="flex items-center gap-2 text-base no-underline md:gap-4 md:text-3xl"
+                        href="#intro-screen"
+                    >
+                        <span
+                            class="size-9 shrink-0 place-items-center rounded-full"
+                        >
+                            <svg
+                                width="36"
+                                height="36"
+                                viewBox="0 0 36 36"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <rect
+                                    width="36"
+                                    height="36"
+                                    rx="18"
+                                    class="fill-accent"
+                                />
+
+                                <g transform="translate(9 9)">
+                                    <path
+                                        d="M6.654 12.346V16.385C6.654 16.5643 6.71167 16.7117 6.827 16.827C6.94233 16.9423 7.08967 17 7.269 17H10.711C10.891 17 11.0387 16.9423 11.154 16.827C11.2693 16.7117 11.327 16.5643 11.327 16.385V12.346H6.654ZM5.654 11.346V6.673H1.616C1.436 6.673 1.28833 6.73067 1.173 6.846C1.05767 6.96133 1 7.10933 1 7.29V10.732C1 10.9113 1.05767 11.0587 1.173 11.174C1.28833 11.2893 1.436 11.347 1.616 11.347L5.654 11.346ZM6.654 11.346H11.327V6.673H6.654V11.346ZM12.327 11.346H16.385C16.5643 11.346 16.7117 11.2883 16.827 11.173C16.9423 11.0577 17 10.9103 17 10.731V6.673H12.327V11.346ZM12.327 5.673H17V1.616C17 1.436 16.9423 1.28833 16.827 1.173C16.7117 1.05767 16.5643 1 16.385 1H12.942C12.7627 1 12.6153 1.05767 12.5 1.173C12.3847 1.28833 12.327 1.436 12.327 1.616V5.673ZM5.654 12.346H1.616C1.17133 12.346 0.791 12.188 0.475 11.872C0.158333 11.5553 0 11.1747 0 10.73V7.288C0 6.84333 0.158333 6.463 0.475 6.147C0.791667 5.831 1.17167 5.67267 1.615 5.672H11.327V1.616C11.327 1.17133 11.485 0.791 11.802 0.475C12.1187 0.159 12.4987 0.000666667 12.942 0H16.385C16.829 0 17.209 0.158333 17.525 0.475C17.841 0.791667 17.9993 1.17167 18 1.615V10.731C18 11.175 17.8417 11.555 17.525 11.871C17.209 12.1877 16.829 12.346 16.385 12.346H12.327V16.385C12.327 16.829 12.169 17.209 11.853 17.525C11.537 17.841 11.1567 17.9993 10.712 18H7.269C6.825 18 6.445 17.8417 6.129 17.525C5.81233 17.209 5.654 16.829 5.654 16.385V12.346Z"
+                                        fill="var(--color-accent-text)"
+                                    />
+                                </g>
+                            </svg>
+                        </span>
+                        <div class="flex flex-col gap-1">
+                            <span
+                                class="font-logo text-accent font-black tracking-normal"
+                                >Cross My Heart.</span
+                            >
+                            <p class="text-muted text-xs">
+                                Create personalized crosswords for every
+                                occasion.
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                    <div class="flex flex-col gap-2 text-sm font-semibold">
+                        <p class="text-muted text-xs font-bold uppercase">
+                            Links
+                        </p>
+                        <a href="/builder.html" class="lg:hover:underline">
+                            Create a crossword
+                        </a>
+                        <a href="/privacy.html" class="lg:hover:underline">
+                            Privacy
+                        </a>
+                    </div>
+
+                    <div class="flex flex-col gap-2 text-sm font-semibold">
+                        <p class="text-muted text-xs font-bold uppercase">
+                            Contact
+                        </p>
+                        <a
+                            href="https://github.com/sabeeh-ck/CrossMyHeart/issues/new"
+                            class="lg:hover:underline"
+                        >
+                            Report an issue
+                        </a>
+                    </div>
+                </div>
+
+                <div class="inset-x-0 flex justify-center">
+                    <p class="text-xs">
+                        Made with 💚 by
+                        <a
+                            href="https://sabeeh-ck.vercel.app"
+                            class="font-bold lg:hover:underline"
+                        >
+                            sabeeh-ck
+                        </a>
+                    </p>
+                </div>
             </div>
-        </section>
+        </footer>
 
         <script type="module" src="/src/main.ts"></script>
     </body>
