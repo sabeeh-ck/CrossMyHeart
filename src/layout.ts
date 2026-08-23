@@ -1,7 +1,7 @@
-import { renderHeader } from "./components/Header";
+import { renderHeader, type HeaderOptions } from "./components/Header";
 import { renderFooter } from "./components/Footer";
 
-export function renderLayout(): void {
-    renderHeader();
+export function renderLayout(options?: HeaderOptions): void {
+    renderHeader(options);
     renderFooter();
 }
