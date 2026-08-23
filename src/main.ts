@@ -20,17 +20,10 @@ import {
     GraduationCap,
     PartyPopper,
 } from "lucide";
+import { renderLayout } from "./layout";
 
-// Initial starting state for the couple
-let items: CrosswordItem[] = [
-    { clue: "Where we had our first date", answer: "COFFEE" },
-    { clue: "Your favorite nickname for me", answer: "HONEY" },
-];
+renderLayout();
 
-const rowsContainer = document.querySelector<HTMLDivElement>("#rows-container");
-const addRowBtn = document.querySelector<HTMLButtonElement>("#add-row-btn");
-const wordCountDisplay = document.querySelector<HTMLSpanElement>("#word-count");
-const gridPreview = document.querySelector<HTMLDivElement>("#grid-preview");
 const themeButton = document.querySelector<HTMLButtonElement>("#theme-button");
 const menu = document.getElementById("theme-menu");
 const themeSelector =
