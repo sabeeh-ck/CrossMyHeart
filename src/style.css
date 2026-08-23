@@ -52,7 +52,7 @@
     --color-border: #d1e8ec;
     --color-accent-hover: #559eb8;
     --color-surface: #f9feff;
-    --color-accent-text: #30424a;
+    --color-accent-text: #edf8fa;
 }
 
 [data-theme="graduation"] {
@@ -78,13 +78,7 @@
 }
 
 body {
-    background-color: var(--color-bg);
-    color: var(--color-text);
-    accent-color: var(--color-accent);
-    transition:
-        background-color 220ms ease,
-        color 220ms ease;
-    @apply font-sans;
+    @apply text-text bg-bg accent-accent font-sans transition-colors duration-300 ease-in;
 }
 
 ::selection {
