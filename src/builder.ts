@@ -1,5 +1,5 @@
 import { generateLayout, type CrosswordItem } from "./crosswordEngine";
-import { createIcons, X } from "lucide";
+import { createIcons, FileDown, X } from "lucide";
 import "./main";
 
 let items: CrosswordItem[] = [{ clue: "", answer: "" }];
@@ -9,12 +9,45 @@ const wordCountDisplay = document.querySelector<HTMLSpanElement>("#word-count");
 const gridPreview = document.querySelector<HTMLDivElement>("#grid-preview");
 const shuffleBtn = document.querySelector<HTMLButtonElement>("#shuffle-btn");
 const MAX_WORDS = 10;
+const MAX_ANSWER_LENGTH = 10;
+
+const escapeHtml = (value: string): string =>
+    value.replace(
+        /[&<>"']/g,
+        (character) =>
+            ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#039;",
+            })[character] || character,
+    );
+
+const resizeTextarea = (textarea: HTMLTextAreaElement): void => {
+    textarea.style.height = "auto";
+    textarea.style.height = `${textarea.scrollHeight}px`;
+};
+
+const updateAddRowButton = (): void => {
+    if (!addRowBtn) return;
+    const lastItem = items[items.length - 1];
+    addRowBtn.disabled =
+        items.length >= MAX_WORDS ||
+        (items.length > 0 && !lastItem.answer.trim());
+};
 
 const updateGridPreview = () => {
     if (!gridPreview) return;
-    const validItems = items.filter((item) => item.answer.trim().length > 0);
+    const validItems = items
+        .map((item, index) => ({ ...item, number: index + 1 }))
+        .filter((item) => item.answer.trim().length > 0);
     if (validItems.length === 0) {
-        gridPreview.innerHTML = `<p class="text-sm text-muted italic">Add words to generate your crossword grid...</p>`;
+        gridPreview.innerHTML = `
+            <p class="text-sm text-muted italic">
+                Add words to generate your crossword grid...
+            </p>
+        `;
         return;
     }
 
@@ -41,66 +74,203 @@ const updateGridPreview = () => {
                 word.orientation === "across"
                     ? word.startX + index
                     : word.startX;
+
             const y =
                 word.orientation === "down" ? word.startY + index : word.startY;
             gridMatrix[`${x},${y}`] = word.word[index];
         }
     });
 
-    let html = `<div class="grid gap-1.5" style="grid-template-columns: repeat(${maxCol}, minmax(0, 1fr));">`;
+    const startCells = new Map<string, string>();
+    placedWords.forEach((word) => {
+        if (word.number === undefined) return;
+        const key = `${word.startX},${word.startY}`;
+        const existingNumber = startCells.get(key);
+        startCells.set(
+            key,
+            existingNumber
+                ? `${existingNumber}/${word.number}`
+                : `${word.number}`,
+        );
+    });
+
+    const gridGap = window.matchMedia("(min-width: 768px)").matches ? 4 : 2;
+    const previewPadding = window.matchMedia("(min-width: 640px)").matches
+        ? 56
+        : 32;
+    const availableWidth = Math.max(
+        gridPreview.clientWidth - previewPadding,
+        0,
+    );
+    const cellSize = Math.max(
+        16,
+        Math.min(
+            36,
+            Math.floor((availableWidth - gridGap * (maxCol - 1)) / maxCol),
+        ),
+    );
+    const cellStyle = `width: ${cellSize}px; height: ${cellSize}px;`;
+    let html = `<div class="grid" style="gap: ${gridGap}px; grid-template-columns: repeat(${maxCol}, ${cellSize}px);">`;
     for (let y = 0; y < maxRow; y++) {
         for (let x = 0; x < maxCol; x++) {
             const char = gridMatrix[`${x},${y}`];
+            const number = startCells.get(`${x},${y}`);
             html += char
-                ? `<div class="flex h-9 w-9 items-center justify-center border border-border bg-accent font-serif text-sm font-bold text-grid-cell-text">${char}</div>`
-                : `<div class="h-9 w-9"></div>`;
+                ? `
+                    <div
+                        class="relative flex items-center justify-center rounded-xs border border-accent bg-bg text-xs font-black text-accent sm:rounded-md sm:text-sm"
+                        style="${cellStyle} font-size: ${Math.max(10, Math.floor(cellSize * 0.4))}px;"
+                    >
+                        <span class="absolute top-0.5 left-0.5 leading-none font-bold" style="font-size: ${Math.max(6, Math.floor(cellSize * 0.2))}px;">${number || ""}</span>
+                        ${char}
+                    </div>
+                `
+                : `<div style="${cellStyle}"></div>`;
         }
     }
-    gridPreview.innerHTML = `${html}</div>`;
+    html += `</div>`;
+
+    const renderClues = (orientation: "across" | "down", title: string) => {
+        const clues = placedWords
+            .filter((word) => word.orientation === orientation)
+            .map((word) => ({
+                ...word,
+                number: word.number,
+            }))
+            .sort((wordA, wordB) => (wordA.number || 0) - (wordB.number || 0));
+
+        return clues.length > 0
+            ? `
+            <div class="min-w-0">
+                <h3 class="text-accent-hover mb-2 text-xs font-bold tracking-widest uppercase">${title}</h3>
+                <ol class="space-y-2"> 
+                    ${clues
+                        .map(
+                            (word) => `
+                            <li class="grid grid-cols-[1.5rem_1fr_1.5rem] gap-1 text-sm leading-snug">
+                                <span class="font-bold text-accent-hover">
+                                    ${word.number}.
+                                </span>
+                                <span class="first-letter:uppercase">${escapeHtml(word.clue)}</span>
+                                <span class="font-bold text-accent-hover">(${word.word.length})</span>
+                            </li>
+                        `,
+                        )
+                        .join("")}
+                </ol>
+            </div>
+        `
+            : "";
+    };
+
+    gridPreview.innerHTML = `
+        <div class="flex w-full flex-col items-center gap-6 sm:gap-8">
+            <div class="max-w-full overflow-hidden p-1">
+                ${html}
+            </div>
+            <div
+                class="grid w-full grid-cols-1 gap-6 border-t border-border pt-6 sm:grid-cols-2"
+            >
+                ${renderClues("across", "Across")}${renderClues("down", "Down")}
+            </div>
+            <div class="w-full flex items-center justify-center"> 
+                <button
+                    type="button"
+                    id="print-button"
+                    class="bg-accent text-accent-text px-4 py-2 flex items-center gap-2 rounded-lg font-bold text-sm transition-all duration-200 active:ring-2 active:ring-inset active:ring-accent-hover active:scale-95 lg:hover:bg-accent-hover"
+                >
+                    <i data-lucide="file-down" class="size-4"></i>
+                    Download
+                </button>
+            </div>
+        </div>
+    `;
+
+    createIcons({ icons: { FileDown } });
 };
+
+window.addEventListener("resize", updateGridPreview);
 
 const renderRows = () => {
     if (!rowsContainer) return;
     rowsContainer.innerHTML = "";
     items.forEach((item, index) => {
         const rowDiv = document.createElement("div");
-        rowDiv.className =
-            "flex items-start justify-between gap-3 border border-border bg-surface p-3";
+        rowDiv.className = "flex items-start justify-between gap-3 bg-surface";
         rowDiv.innerHTML = `
-            <span class="w-5 pt-2 text-sm font-bold text-accent">${index + 1}</span>
-            <div class="flex flex-1 flex-col gap-2">
-                <input type="text" placeholder="Clue" value="${item.clue}" data-index="${index}" data-field="clue" class="clue-input w-full flex-1 border border-border bg-bg px-3 py-2 text-sm text-text placeholder:text-muted focus:border-focus-ring focus:outline-none" />
-                <input type="text" placeholder="ANSWER" value="${item.answer}" data-index="${index}" data-field="answer" class="answer-input w-full border border-border bg-bg px-3 py-2 text-sm font-bold tracking-wider text-accent uppercase placeholder:text-muted focus:border-focus-ring focus:outline-none" maxLength="12" />
-            </div>
-            <button data-index="${index}" class="delete-btn px-1 py-2 text-muted transition hover:text-accent"><i data-lucide="x"></i></button>`;
+            <div class="flex flex-1 bg-bg border border-border rounded-lg">
+                <span class="w-5 py-2 px-3 font-bold self-start text-accent">${index + 1}</span>
+                <div class="flex flex-1 flex-col">
+                    <textarea
+                        id="clue-input"
+                        placeholder="Clue"
+                        data-index="${index}"
+                        data-field="clue"
+                        rows="1"
+                        class="w-full resize-none overflow-hidden px-3 pb-1 pt-2 text-sm text-text font-medium placeholder:text-muted focus:border-focus-ring focus:outline-none"
+                    >${item.clue}</textarea>
+                    <input
+                        type="text"
+                        placeholder="ANSWER"
+                        value="${item.answer}"
+                        data-index="${index}"
+                        data-field="answer"
+                        class="answer-input w-full px-3 pb-2 pt-1 text-sm font-bold tracking-wider text-accent uppercase placeholder:text-muted focus:border-focus-ring focus:outline-none"
+                        maxLength="${MAX_ANSWER_LENGTH}"
+                    />
+                </div>
+                <button
+                    data-index="${index}"
+                    class="delete-btn p-2 self-center mx-2 text-muted transition ring ring-border rounded-md hover:text-accent hover:ring-accent active:ring-accent active:ring-2"
+                >
+                    <i data-lucide="x" class="size-4"></i>
+                </button>
+            </div>`;
         rowsContainer.appendChild(rowDiv);
     });
+    rowsContainer
+        .querySelectorAll<HTMLTextAreaElement>("[data-field='clue']")
+        .forEach(resizeTextarea);
     if (wordCountDisplay)
         wordCountDisplay.textContent = `${items.length} / ${MAX_WORDS} max`;
+    updateAddRowButton();
     createIcons({ icons: { X } });
     updateGridPreview();
 };
 
 shuffleBtn?.addEventListener("click", () => {
-    if (items.length <= 2) return;
-    const [first, ...rest] = items;
-    for (let index = rest.length - 1; index > 0; index--) {
-        const randomIndex = Math.floor(Math.random() * (index + 1));
-        [rest[index], rest[randomIndex]] = [rest[randomIndex], rest[index]];
-    }
-    items = [first, ...rest];
+    if (items.length <= 1) return;
+
+    let shuffledItems: CrosswordItem[];
+    do {
+        shuffledItems = [...items];
+        for (let index = shuffledItems.length - 1; index > 0; index--) {
+            const randomIndex = Math.floor(Math.random() * (index + 1));
+            [shuffledItems[index], shuffledItems[randomIndex]] = [
+                shuffledItems[randomIndex],
+                shuffledItems[index],
+            ];
+        }
+    } while (shuffledItems.every((item, index) => item === items[index]));
+
+    items = shuffledItems;
     renderRows();
 });
 
 rowsContainer?.addEventListener("input", (event) => {
     const target = event.target as HTMLInputElement;
+    if (target instanceof HTMLTextAreaElement) resizeTextarea(target);
     const index = parseInt(target.dataset.index || "0", 10);
     const field = target.dataset.field as "clue" | "answer";
     items[index][field] =
         field === "answer"
-            ? target.value.toUpperCase().replace(/[^A-Z]/g, "")
+            ? target.value
+                  .toUpperCase()
+                  .replace(/[^A-Z]/g, "")
+                  .slice(0, MAX_ANSWER_LENGTH)
             : target.value;
     target.value = items[index][field];
+    updateAddRowButton();
     updateGridPreview();
 });
 
@@ -114,10 +284,8 @@ rowsContainer?.addEventListener("click", (event) => {
 });
 
 addRowBtn?.addEventListener("click", () => {
-    if (items.length < MAX_WORDS) {
-        items.push({ clue: "", answer: "" });
-        renderRows();
-    }
+    items.push({ clue: "", answer: "" });
+    renderRows();
 });
 
 renderRows();

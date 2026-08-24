@@ -19,92 +19,74 @@
         <div id="site-header"></div>
 
         <main
-            class="relative isolate flex-1 overflow-hidden before:absolute before:inset-0 before:-z-20 before:bg-[linear-gradient(rgba(42,37,35,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(42,37,35,0.045)_1px,transparent_1px)] before:bg-size-[44px_44px]"
+            class="mx-6 flex min-h-[calc(100vh-10rem)] max-w-6xl flex-col gap-10 lg:mx-auto lg:gap-4"
         >
             <div
-                class="absolute -top-40 -right-40 -z-10 size-100 rounded-full bg-[#f4c8b7] opacity-45"
-            ></div>
-            <div
-                class="absolute -bottom-48 -left-32 -z-10 size-100 rounded-full bg-[#cbd9ca] opacity-45"
-            ></div>
-
-            <div
-                class="mx-auto grid w-[calc(100%-3rem)] max-w-290 grid-cols-[minmax(0,.9fr)_minmax(360px,1.1fr)] items-start gap-12 px-0 pt-12 pb-20 max-[900px]:grid-cols-1 max-[900px]:gap-8 max-[900px]:pt-8"
+                class="mx-auto grid w-full grid-cols-1 gap-10 lg:grid-cols-[4fr_6fr]"
             >
                 <section
-                    class="relative border border-[rgba(42,37,35,.13)] bg-[rgba(255,252,247,.7)] px-7 pt-7 pb-8 shadow-[1.5rem_1.5rem_0_rgba(169,78,79,.1)] max-[900px]:px-5"
+                    class="border-border bg-surface relative rounded-lg border p-4 lg:p-8"
                 >
                     <div
-                        class="border-border mb-7 flex items-end justify-between border-b pb-4"
+                        class="border-border mb-4 flex items-center justify-between border-b pb-4 lg:mb-6"
                     >
-                        <div>
-                            <p
-                                class="text-muted text-[.65rem] tracking-[.12em] uppercase"
-                            >
-                                Your clues
-                            </p>
-                            <h2 class="mt-1 font-serif text-2xl font-normal">
-                                The little details
-                            </h2>
-                        </div>
-                        <span id="word-count" class="text-muted text-xs"
-                            >0 / 10 max</span
+                        <h2
+                            class="text-muted font-bold tracking-widest uppercase"
                         >
+                            Your clues
+                        </h2>
+                        <span
+                            id="word-count"
+                            class="text-muted text-xs font-bold"
+                        >
+                            0 / 10 max
+                        </span>
                     </div>
-                    <div
-                        id="rows-container"
-                        class="max-h-[52vh] space-y-3 overflow-y-auto pr-2"
-                    ></div>
+
+                    <div id="rows-container" class="space-y-3"></div>
+
                     <div
                         class="border-border mt-6 flex items-center justify-between gap-4 border-t pt-5"
                     >
                         <button
                             id="add-row-btn"
-                            class="bg-button hover:bg-accent inline-flex items-center gap-2 px-4 py-3 text-xs font-bold text-[#fff8f1] transition hover:-translate-y-0.5"
+                            class="bg-button hover:bg-accent-hover text-accent-text bg-accent disabled:border-border disabled:text-border disabled:hover:bg-border inline-flex cursor-pointer items-center gap-2 rounded-lg px-5 py-3 text-xs font-bold transition duration-250 hover:-translate-y-0.5 active:scale-95 disabled:scale-100! disabled:cursor-not-allowed disabled:border disabled:bg-transparent disabled:hover:translate-y-0"
                         >
-                            <i data-lucide="plus"></i><span>Add a clue</span>
+                            <i data-lucide="plus" class="size-4 stroke-3"></i>
+                            <span>Add a clue</span>
                         </button>
                         <button
                             id="shuffle-btn"
-                            class="text-muted hover:text-accent inline-flex items-center gap-2 px-2 py-2 text-xs font-bold transition"
+                            class="text-muted ring-border hover:ring-accent bg-surface hover:text-accent active:ring-accent active:text-accent inline-flex cursor-pointer items-center gap-2 rounded-lg px-5 py-3 text-xs font-bold ring transition-all duration-250 ring-inset active:scale-95 active:ring-2"
                         >
-                            <i data-lucide="shuffle"></i><span>Reorder</span>
+                            <i data-lucide="shuffle" class="size-4"></i>
+                            <span>Reorder</span>
                         </button>
                     </div>
                 </section>
 
                 <section
-                    class="bg-surface relative min-h-100 border border-[rgba(42,37,35,.13)] px-7 py-7 shadow-[.8rem_.8rem_0_rgba(203,217,202,.7)] max-[900px]:px-5"
+                    class="border-border bg-surface relative rounded-lg border p-4 lg:p-8"
                 >
                     <div
-                        class="border-border flex items-center justify-between border-b pb-4"
+                        class="border-border mb-4 flex items-center justify-between border-b pb-4 lg:mb-6"
                     >
-                        <div>
-                            <p
-                                class="text-muted text-[.65rem] tracking-[.12em] uppercase"
-                            >
-                                A glimpse of
-                            </p>
-                            <h2 class="mt-1 font-serif text-2xl font-normal">
-                                Your finished keepsake
-                            </h2>
-                        </div>
+                        <h2
+                            class="text-muted font-bold tracking-widest uppercase"
+                        >
+                            Your finished puzzle
+                        </h2>
                         <i data-lucide="heart" class="text-accent h-5 w-5"></i>
                     </div>
+
                     <div
                         id="grid-preview"
-                        class="flex min-h-72 w-full items-center justify-center overflow-auto p-6"
+                        class="flex min-h-72 w-full min-w-0 items-center justify-center overflow-hidden p-3 pb-0 md:p-6 md:pb-0"
                     >
                         <p class="text-muted text-sm italic">
                             Add words to generate your crossword grid...
                         </p>
                     </div>
-                    <button
-                        id="download-pdf-btn"
-                        class="bg-button hover:bg-accent inline-flex w-full items-center justify-center gap-2 py-3 text-xs font-bold text-[#fff8f1] transition hover:-translate-y-0.5"
-                    >
-                        <i data-lucide="download"></i> Download PDF
-                    </button>
                 </section>
             </div>
         </main>
