@@ -16,10 +16,12 @@
     <body>
         <div id="site-header"></div>
 
-        <main class="mx-6 flex flex-col gap-6 text-sm">
+        <main class="mx-6 flex max-w-6xl flex-col gap-6 text-sm lg:mx-auto">
             <div class="flex flex-col gap-4">
-                <h1 class="text-2xl font-bold">Privacy Policy</h1>
-                <p class="text-muted text-sm">Last updated: August 21, 2026</p>
+                <h1 class="text-2xl font-bold lg:text-4xl">Privacy Policy</h1>
+                <p class="text-muted text-sm lg:text-base">
+                    Last updated: August 21, 2026
+                </p>
                 <p>
                     Cross My Heart is a browser-based crossword builder for
                     creating personalized puzzles for weddings, birthdays,
@@ -27,7 +29,9 @@
                 </p>
             </div>
             <div class="flex flex-col gap-2">
-                <h2 class="text-lg font-bold">Information you enter</h2>
+                <h2 class="text-lg font-bold lg:text-2xl">
+                    Information you enter
+                </h2>
                 <p>
                     You may enter crossword clues, answers, names, event
                     details, and other personalized content while using the
@@ -39,7 +43,7 @@
                 </p>
             </div>
             <div class="flex flex-col gap-2">
-                <h2 class="text-lg font-bold">Theme preference</h2>
+                <h2 class="text-lg font-bold lg:text-2xl">Theme preference</h2>
                 <p>
                     The website stores your selected visual theme in your
                     browser’s local storage so it can remember your preference.
@@ -49,14 +53,18 @@
                 </p>
             </div>
             <div class="flex flex-col gap-2">
-                <h2 class="text-lg font-bold">No account required</h2>
+                <h2 class="text-lg font-bold lg:text-2xl">
+                    No account required
+                </h2>
                 <p>
                     You can use the crossword builder without creating an
                     account, signing in, or submitting personal information.
                 </p>
             </div>
             <div class="flex flex-col gap-2">
-                <h2 class="text-lg font-bold">Cookies and analytics</h2>
+                <h2 class="text-lg font-bold lg:text-2xl">
+                    Cookies and analytics
+                </h2>
                 <p>
                     Cross My Heart does not use advertising cookies or tracking
                     cookies. The crossword builder does not use analytics or
@@ -65,7 +73,9 @@
                 </p>
             </div>
             <div class="flex flex-col gap-2">
-                <h2 class="text-lg font-bold">Third-party services</h2>
+                <h2 class="text-lg font-bold lg:text-2xl">
+                    Third-party services
+                </h2>
                 <p>
                     Cross My Heart is hosted using Vercel. When you visit the
                     website, Vercel may process limited technical information
@@ -97,7 +107,9 @@
                 </p>
             </div>
             <div class="flex flex-col gap-2">
-                <h2 class="text-lg font-bold">Your crossword data</h2>
+                <h2 class="text-lg font-bold lg:text-2xl">
+                    Your crossword data
+                </h2>
                 <p>
                     Because your crossword is processed in your browser, Cross
                     My Heart does not have access to a copy of the crossword
@@ -108,7 +120,9 @@
                 </p>
             </div>
             <div class="flex flex-col gap-2">
-                <h2 class="text-lg font-bold">Children’s privacy</h2>
+                <h2 class="text-lg font-bold lg:text-2xl">
+                    Children’s privacy
+                </h2>
                 <p>
                     Cross My Heart does not knowingly collect personal
                     information from children. Users should avoid entering
@@ -117,7 +131,7 @@
                 </p>
             </div>
             <div class="flex flex-col gap-2">
-                <h2 class="text-lg font-bold">
+                <h2 class="text-lg font-bold lg:text-2xl">
                     Changes to this Privacy Policy
                 </h2>
                 <p>
@@ -126,14 +140,23 @@
                     shows when this policy was last updated.
                 </p>
             </div>
-            <div class="flex flex-col gap-2">
-                <h2 class="text-lg font-bold">Contact</h2>
+            <div class="flex flex-col items-start gap-2">
+                <h2 class="text-lg font-bold lg:text-2xl">Contact</h2>
                 <p>If you have questions about this Privacy Policy, contact:</p>
-                <p class="font-bold">Muhammed Sabeeh C K</p>
-                <p class="text-muted -mt-2">sabeeh-ck@outlook.com</p>
+                <p class="font-bold">Sabeeh C K</p>
+                <button
+                    type="button"
+                    id="privacy-email-me"
+                    class="ring-border hover:ring-accent flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2 font-bold ring ring-inset active:ring-3"
+                >
+                    <i data-lucide="send" class="size-4"></i>
+                    Email me
+                </button>
             </div>
         </main>
 
         <div id="site-footer"></div>
+
+        <script type="module" src="/src/privacy.ts"></script>
     </body>
 </html>
