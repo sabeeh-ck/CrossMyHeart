@@ -1,6 +1,7 @@
 export interface CrosswordItem {
     clue: string;
     answer: string;
+    number?: number;
 }
 
 export interface PlacedWord {
@@ -9,16 +10,16 @@ export interface PlacedWord {
     startX: number;
     startY: number;
     orientation: "across" | "down";
+    number?: number;
 }
 
 export function generateLayout(items: CrosswordItem[]): PlacedWord[] {
     if (items.length === 0) return [];
 
-    const sortedItems = [...items].sort(
-        (a, b) => b.answer.length - a.answer.length,
-    );
+    const sortedItems = [...items];
 
     const placedWords: PlacedWord[] = [];
+    const isolatedItems: CrosswordItem[] = [];
 
     const getCell = (grid: Map<string, string>, x: number, y: number) =>
         grid.get(`${x},${y}`);
@@ -66,14 +67,11 @@ export function generateLayout(items: CrosswordItem[]): PlacedWord[] {
                             n.y >= startY &&
                             n.y < startY + word.length);
                     if (!isOwnWord && getCell(grid, n.x, n.y)) {
-                        // Check if it's a tight parallel collision
-                        // (Keeping it simple: strict isolation isn't always mandatory, but helps layout)
                     }
                 }
             }
         }
 
-        // First word doesn't need intersections, subsequent words MUST intersect at least once
         const isValid =
             !collision && (placedWords.length === 0 || intersections > 0);
         return { isValid, intersections: sharedCells, collision };
@@ -101,6 +99,7 @@ export function generateLayout(items: CrosswordItem[]): PlacedWord[] {
         startX: 0,
         startY: 0,
         orientation: "across",
+        number: first.number,
     });
 
     // --- Place Subsequent Words using Human-Like Scoring ---
@@ -116,16 +115,13 @@ export function generateLayout(items: CrosswordItem[]): PlacedWord[] {
         } | null = null;
         let maxScore = -1;
 
-        // Check intersection against EVERY already placed word
         for (const placed of placedWords) {
             for (let wIdx = 0; wIdx < item.answer.length; wIdx++) {
                 for (let pIdx = 0; pIdx < placed.word.length; pIdx++) {
                     if (item.answer[wIdx] === placed.word[pIdx]) {
-                        // Determine complementary orientation
                         const orientation: "across" | "down" =
                             placed.orientation === "across" ? "down" : "across";
 
-                        // Calculate starting coordinates so the matching letters align
                         let startX = 0;
                         let startY = 0;
 
@@ -145,10 +141,8 @@ export function generateLayout(items: CrosswordItem[]): PlacedWord[] {
                             placed.orientation === "across" &&
                             orientation === "across"
                         ) {
-                            // Parallel case (usually avoided unless offset, but skip for true crosswords)
                             continue;
                         } else {
-                            // Parallel down-down
                             continue;
                         }
 
@@ -194,9 +188,32 @@ export function generateLayout(items: CrosswordItem[]): PlacedWord[] {
                 startX: bestOption.startX,
                 startY: bestOption.startY,
                 orientation: bestOption.orientation,
+                number: item.number,
             });
+        } else {
+            isolatedItems.push(item);
         }
     }
+
+    // Keep words without a possible intersection in the same puzzle grid.
+    let isolatedStartY = placedWords.reduce((maxY, word) => {
+        const endY =
+            word.orientation === "down"
+                ? word.startY + word.word.length
+                : word.startY + 1;
+        return Math.max(maxY, endY);
+    }, 0);
+    isolatedItems.forEach((item) => {
+        placedWords.push({
+            word: item.answer,
+            clue: item.clue,
+            startX: 0,
+            startY: isolatedStartY + 1,
+            orientation: "across",
+            number: item.number,
+        });
+        isolatedStartY += item.answer.length > 0 ? 2 : 1;
+    });
 
     // Normalize coordinates so the grid always starts at (0,0) or positive indices
     let minX = Infinity;
