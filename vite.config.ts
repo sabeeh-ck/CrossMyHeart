@@ -8,6 +8,7 @@ export default defineConfig({
             input: {
                 landing: "index.html",
                 builder: "builder.html",
+                privacy: "privacy.html",
             },
         },
     },
