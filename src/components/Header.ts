@@ -1,7 +1,26 @@
-export const renderHeader = (): void => {
+import { Baby, Cake, Gem, GraduationCap, Heart, PartyPopper } from "lucide";
+
+export const themeIcons = {
+    Heart,
+    Cake,
+    Gem,
+    Baby,
+    GraduationCap,
+    PartyPopper,
+};
+
+export interface HeaderOptions {
+    showCreateButton?: boolean;
+    showThemeSelector?: boolean;
+}
+
+export const renderHeader = (options: HeaderOptions = {}): void => {
     const header = document.querySelector<HTMLElement>("#site-header");
 
     if (!header) return;
+
+    const showCreateButton = options.showCreateButton ?? true;
+    const showThemeSelector = options.showThemeSelector ?? true;
 
     header.innerHTML = `
         <header>
@@ -37,21 +56,27 @@ export const renderHeader = (): void => {
                 <div
                     class="flex items-center justify-between gap-3 sm:justify-end md:gap-5"
                 >
-                    <a
+                    ${
+                        showCreateButton
+                            ? `<a
                         href="/builder.html"
                         class="bg-accent hover:bg-accent-hover text-accent-text hidden items-center gap-2 rounded-lg px-4 py-2 text-xs font-bold transition duration-180 active:scale-95 lg:inline-flex lg:hover:-translate-y-0.5"
                     >
                         Create yours
                         <i data-lucide="arrow-up-right" class="size-5"></i>
-                    </a>
+                    </a>`
+                            : ""
+                    }
 
-                    <div id="theme-dropdown" class="relative w-fit">
+                    ${
+                        showThemeSelector
+                            ? `<div id="theme-dropdown" class="relative w-fit">
                         <button
                             id="theme-button"
                             type="button"
                             aria-haspopup="listbox"
                             aria-expanded="false"
-                            class="border-border bg-surface text-text hover:border-accent focus:border-focus-ring flex items-center gap-2 rounded-md border px-3 py-2.5 text-xs transition focus:outline-none"
+                            class="ring-border bg-surface text-text ring-inset lg:hover:ring-accent focus:ring-accent active:ring-2 active:ring-accent-hover flex items-center gap-2 rounded-md ring px-3 py-2.5 text-xs transition focus:outline-none"
                         >
                             <i data-lucide="heart" class="text-accent size-3"></i>
                             <span>Romance</span>
@@ -69,7 +94,7 @@ export const renderHeader = (): void => {
                                 data-value="romance"
                                 data-label="Romance"
                                 data-icon="heart"
-                                class="theme-option hover:bg-bg flex w-full items-center gap-2 rounded-sm p-2 text-left text-xs text-[#7a263a]"
+                                class="theme-option hover:bg-bg flex w-full items-center gap-2 rounded-md p-2 text-left text-xs text-[#7a263a]"
                             >
                                 <i data-lucide="heart" class="size-4"></i>
                                 <span>Romance</span>
@@ -142,7 +167,9 @@ export const renderHeader = (): void => {
                             name="theme"
                             value="romance"
                         />
-                    </div>
+                    </div>`
+                            : ""
+                    }
                 </div>
             </nav>
         </header>

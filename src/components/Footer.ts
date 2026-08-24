@@ -5,8 +5,8 @@ export const renderFooter = (): void => {
 
     footer.innerHTML = `
         <footer class="bg-surface mt-12 pt-12 pb-6">
-            <div class="mx-6 flex max-w-6xl flex-col gap-6 lg:mx-auto">
-                <div class="flex items-center gap-2">
+            <div class="mx-6 flex flex-col max-w-6xl gap-6 lg:mx-auto">
+                <div class="flex flex-col items-start">
                     <a
                         class="flex items-center gap-2 text-base no-underline md:gap-4 md:text-3xl"
                         href="/index.html"
@@ -36,41 +36,48 @@ export const renderFooter = (): void => {
                                 </g>
                             </svg>
                         </span>
-                        <div class="flex flex-col gap-1">
-                            <span class="font-logo text-accent font-black tracking-normal">
-                                Cross My Heart.
-                            </span>
-                            <p class="text-muted text-xs">
-                                Create personalized crosswords for every
-                                occasion.
-                            </p>
-                        </div>
+                        <span class="font-logo text-accent text-2xl font-black tracking-normal">
+                            Cross My Heart.
+                        </span>
                     </a>
+                    <p class="text-muted text-xs ml-11 lg:ml-13">
+                        Create personalized crosswords for every
+                        occasion.
+                    </p>
                 </div>
 
-                <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                    <div class="flex flex-col gap-2 text-sm font-semibold">
+                <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+                    <div class="flex flex-col gap-2 items-start text-sm font-semibold">
                         <p class="text-muted text-xs font-bold uppercase">
                             Links
                         </p>
-                        <a href="/builder.html" class="lg:hover:underline">
-                            Create a crossword
-                        </a>
-                        <a href="/privacy.html" class="lg:hover:underline">
-                            Privacy
-                        </a>
+                        <div class="flex flex-col gap-3 md:flex-row md:gap-6">
+                            <a href="/builder.html" class="lg:hover:underline">
+                                Create a crossword
+                            </a>
+                            <span class="hidden text-muted md:block">•</span>
+                            <a href="/privacy.html" class="lg:hover:underline">
+                                Privacy
+                            </a>
+                        </div>
                     </div>
 
-                    <div class="flex flex-col gap-2 text-sm font-semibold">
+                    <div class="flex flex-col items-start gap-2 text-sm font-semibold">
                         <p class="text-muted text-xs font-bold uppercase">
                             Contact
                         </p>
-                        <a
-                            href="https://github.com/sabeeh-ck/CrossMyHeart/issues/new"
-                            class="lg:hover:underline"
-                        >
-                            Report an issue
-                        </a>
+                        <div class="flex flex-col gap-3 md:flex-row md:gap-6">
+                            <button type="button" id="email-me" class="text-start cursor-pointer hover:underline">
+                                Contact me
+                            </button>
+                            <span class="hidden text-muted md:block">•</span>
+                            <a
+                                href="https://github.com/sabeeh-ck/CrossMyHeart/issues/new"
+                                class="lg:hover:underline"
+                            >
+                                Report an issue
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -79,6 +86,7 @@ export const renderFooter = (): void => {
                         Made with 💚 by
                         <a
                             href="https://sabeeh-ck.vercel.app"
+                            target="_blank"
                             class="font-bold lg:hover:underline"
                         >
                             sabeeh-ck
