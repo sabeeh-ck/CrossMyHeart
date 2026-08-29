@@ -1,6 +1,7 @@
 import { generateLayout, type CrosswordItem } from "./crosswordEngine";
-import { createIcons, FileDown, X } from "lucide";
+import { ChevronDown, createIcons, FileDown, X } from "lucide";
 import "./main";
+import { bindPrintMenu } from "./pdf";
 
 let items: CrosswordItem[] = [{ clue: "", answer: "" }];
 const rowsContainer = document.querySelector<HTMLDivElement>("#rows-container");
@@ -39,11 +40,12 @@ const updateAddRowButton = (): void => {
 
 const updateGridPreview = () => {
     if (!gridPreview) return;
+    const preview = gridPreview;
     const validItems = items
         .map((item, index) => ({ ...item, number: index + 1 }))
         .filter((item) => item.answer.trim().length > 0);
     if (validItems.length === 0) {
-        gridPreview.innerHTML = `
+        preview.innerHTML = `
             <p class="text-sm text-muted italic">
                 Add words to generate your crossword grid...
             </p>
@@ -163,9 +165,9 @@ const updateGridPreview = () => {
             : "";
     };
 
-    gridPreview.innerHTML = `
+    preview.innerHTML = `
         <div class="flex w-full flex-col items-center gap-6 sm:gap-8">
-            <div class="max-w-full overflow-hidden p-1">
+            <div class="max-w-full p-1">
                 ${html}
             </div>
             <div
@@ -173,20 +175,53 @@ const updateGridPreview = () => {
             >
                 ${renderClues("across", "Across")}${renderClues("down", "Down")}
             </div>
-            <div class="w-full flex items-center justify-center"> 
+
+            <div class="relative w-full flex items-center justify-center gap-0.5">
                 <button
                     type="button"
                     id="print-button"
-                    class="bg-accent text-accent-text px-4 py-2 flex items-center gap-2 rounded-lg font-bold text-sm transition-all duration-200 active:ring-2 active:ring-inset active:ring-accent-hover active:scale-95 lg:hover:bg-accent-hover"
+                    class="bg-accent text-accent-text px-4 py-2 flex items-center gap-2 rounded-l-lg rounded-r-sm font-bold text-sm transition-all duration-200 active:ring-2 active:ring-inset active:ring-accent-hover active:scale-95 lg:hover:bg-accent-hover"
                 >
-                    <i data-lucide="file-down" class="size-4"></i>
-                    Download
+                    <i data-lucide="file-down" class="size-4 stroke-2"></i>
+                    Download (A4)
                 </button>
+
+                <button type="button"
+                    id="print-type"
+                    aria-haspopup="listbox"
+                    aria-expanded="false"
+                    class="bg-accent text-accent-text p-2 flex items-center gap-2 rounded-r-lg rounded-l-sm font-bold text-sm transition-all duration-200 active:ring-2 active:ring-inset active:ring-accent-hover active:scale-95 lg:hover:bg-accent-hover"
+                >
+                    <i data-lucide="chevron-down" class="size-5"></i>
+                </button>
+
+                <div
+                    id="print-menu"
+                    role="listbox"
+                    class="absolute left-0 top-full z-50 mt-2 hidden flex-col items-start overflow-visible rounded-xl border border-border bg-bg px-4 py-2 font-bold shadow-lg"
+                >
+                    <button
+                        type="button"
+                        data-pdf-size="a5"
+                        class="theme-option hover:bg-bg flex items-center gap-2 rounded-md p-2 text-left text-xs"
+                    >
+                        <span>Download (A5)</span>
+                    </button>
+
+                    <button
+                        type="button"
+                        data-pdf-size="letter"
+                        class="theme-option hover:bg-bg flex items-center gap-2 rounded-md p-2 text-left text-xs"
+                    >
+                        <span>Download (Letter)</span>
+                    </button>
+                </div>
             </div>
         </div>
     `;
 
-    createIcons({ icons: { FileDown } });
+    bindPrintMenu(preview);
+    createIcons({ icons: { FileDown, ChevronDown } });
 };
 
 window.addEventListener("resize", updateGridPreview);

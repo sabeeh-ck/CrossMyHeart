@@ -59,115 +59,117 @@ export const renderHeader = (options: HeaderOptions = {}): void => {
                     ${
                         showCreateButton
                             ? `<a
-                        href="/builder.html"
-                        class="bg-accent hover:bg-accent-hover text-accent-text hidden items-center gap-2 rounded-lg px-4 py-2 text-xs font-bold transition duration-180 active:scale-95 lg:inline-flex lg:hover:-translate-y-0.5"
-                    >
-                        Create yours
-                        <i data-lucide="arrow-up-right" class="size-5"></i>
-                    </a>`
+                                    href="/builder.html"
+                                    class="bg-accent hover:bg-accent-hover text-accent-text hidden items-center gap-2 rounded-lg px-4 py-2 text-xs font-bold transition duration-180 active:scale-95 lg:inline-flex lg:hover:-translate-y-0.5"
+                                >
+                                    Create yours
+                                    <i data-lucide="arrow-up-right" class="size-5"></i>
+                                </a>`
                             : ""
                     }
 
                     ${
                         showThemeSelector
-                            ? `<div id="theme-dropdown" class="relative w-fit">
-                        <button
-                            id="theme-button"
-                            type="button"
-                            aria-haspopup="listbox"
-                            aria-expanded="false"
-                            class="ring-border bg-surface text-text ring-inset lg:hover:ring-accent focus:ring-accent active:ring-2 active:ring-accent-hover flex items-center gap-2 rounded-md ring px-3 py-2.5 text-xs transition focus:outline-none"
-                        >
-                            <i data-lucide="heart" class="text-accent size-3"></i>
-                            <span>Romance</span>
-                            <i data-lucide="chevron-down" class="size-3"></i>
-                        </button>
+                            ? `
+                                <div id="theme-dropdown" class="relative w-fit">
+                                    <button
+                                        id="theme-button"
+                                        type="button"
+                                        aria-haspopup="listbox"
+                                        aria-expanded="false"
+                                        class="ring-border bg-surface text-text lg:hover:ring-accent focus:ring-accent active:ring-accent-hover flex items-center gap-2 rounded-md px-3 py-2.5 text-xs ring transition ring-inset focus:outline-none active:ring-2"
+                                    >
+                                        <i data-lucide="heart" class="text-accent size-3"></i>
+                                        <span>Romance</span>
+                                        <i data-lucide="chevron-down" class="size-3"></i>
+                                    </button>
 
-                        <div
-                            id="theme-menu"
-                            role="listbox"
-                            class="border-border bg-surface absolute right-0 z-20 mt-2 hidden min-w-full rounded-xl border p-1"
-                        >
-                            <button
-                                type="button"
-                                role="option"
-                                data-value="romance"
-                                data-label="Romance"
-                                data-icon="heart"
-                                class="theme-option hover:bg-bg flex w-full items-center gap-2 rounded-md p-2 text-left text-xs text-[#7a263a]"
-                            >
-                                <i data-lucide="heart" class="size-4"></i>
-                                <span>Romance</span>
-                            </button>
+                                    <div
+                                        id="theme-menu"
+                                        role="listbox"
+                                        class="border-border bg-surface absolute right-0 z-20 mt-2 hidden min-w-full rounded-xl border p-1"
+                                    >
+                                        <button
+                                            type="button"
+                                            role="option"
+                                            data-value="romance"
+                                            data-label="Romance"
+                                            data-icon="heart"
+                                            class="theme-option hover:bg-bg flex w-full items-center gap-2 rounded-md p-2 text-left text-xs text-[#7a263a]"
+                                        >
+                                            <i data-lucide="heart" class="size-4"></i>
+                                            <span>Romance</span>
+                                        </button>
 
-                            <button
-                                type="button"
-                                role="option"
-                                data-value="birthday"
-                                data-label="Birthday"
-                                data-icon="cake"
-                                class="theme-option hover:bg-bg flex w-full items-center gap-2 rounded-sm p-2 text-left text-xs text-[#e85d4a]"
-                            >
-                                <i data-lucide="cake" class="size-4"></i>
-                                <span>Birthday</span>
-                            </button>
+                                        <button
+                                            type="button"
+                                            role="option"
+                                            data-value="birthday"
+                                            data-label="Birthday"
+                                            data-icon="cake"
+                                            class="theme-option hover:bg-bg flex w-full items-center gap-2 rounded-sm p-2 text-left text-xs text-[#e85d4a]"
+                                        >
+                                            <i data-lucide="cake" class="size-4"></i>
+                                            <span>Birthday</span>
+                                        </button>
 
-                            <button
-                                type="button"
-                                role="option"
-                                data-value="wedding"
-                                data-label="Wedding"
-                                data-icon="gem"
-                                class="theme-option hover:bg-bg flex w-full items-center gap-2 rounded-sm p-2 text-left text-xs text-[#c9a96e]"
-                            >
-                                <i data-lucide="gem" class="size-4"></i>
-                                <span>Wedding</span>
-                            </button>
+                                        <button
+                                            type="button"
+                                            role="option"
+                                            data-value="wedding"
+                                            data-label="Wedding"
+                                            data-icon="gem"
+                                            class="theme-option hover:bg-bg flex w-full items-center gap-2 rounded-sm p-2 text-left text-xs text-[#c9a96e]"
+                                        >
+                                            <i data-lucide="gem" class="size-4"></i>
+                                            <span>Wedding</span>
+                                        </button>
 
-                            <button
-                                type="button"
-                                role="option"
-                                data-value="baby-shower"
-                                data-label="Baby Shower"
-                                data-icon="baby"
-                                class="theme-option hover:bg-bg flex w-full items-center gap-2 rounded-sm p-2 text-left text-xs text-[#76BBD3]"
-                            >
-                                <i data-lucide="baby" class="size-4"></i>
-                                <span>Baby Shower</span>
-                            </button>
+                                        <button
+                                            type="button"
+                                            role="option"
+                                            data-value="baby-shower"
+                                            data-label="Baby Shower"
+                                            data-icon="baby"
+                                            class="theme-option hover:bg-bg flex w-full items-center gap-2 rounded-sm p-2 text-left text-xs text-[#76BBD3]"
+                                        >
+                                            <i data-lucide="baby" class="size-4"></i>
+                                            <span>Baby Shower</span>
+                                        </button>
 
-                            <button
-                                type="button"
-                                role="option"
-                                data-value="graduation"
-                                data-label="Graduation"
-                                data-icon="graduation-cap"
-                                class="theme-option hover:bg-bg flex w-full items-center gap-2 rounded-sm p-2 text-left text-xs text-[#23395D]"
-                            >
-                                <i data-lucide="graduation-cap" class="size-4"></i>
-                                <span>Graduation</span>
-                            </button>
+                                        <button
+                                            type="button"
+                                            role="option"
+                                            data-value="graduation"
+                                            data-label="Graduation"
+                                            data-icon="graduation-cap"
+                                            class="theme-option hover:bg-bg flex w-full items-center gap-2 rounded-sm p-2 text-left text-xs text-[#23395D]"
+                                        >
+                                            <i data-lucide="graduation-cap" class="size-4"></i>
+                                            <span>Graduation</span>
+                                        </button>
 
-                            <button
-                                type="button"
-                                role="option"
-                                data-value="celebration"
-                                data-label="Celebration"
-                                data-icon="party-popper"
-                                class="theme-option hover:bg-bg flex w-full items-center gap-2 rounded-sm p-2 text-left text-xs text-[#285943]"
-                            >
-                                <i data-lucide="party-popper" class="size-4"></i>
-                                <span>Celebration</span>
-                            </button>
-                        </div>
+                                        <button
+                                            type="button"
+                                            role="option"
+                                            data-value="celebration"
+                                            data-label="Celebration"
+                                            data-icon="party-popper"
+                                            class="theme-option hover:bg-bg flex w-full items-center gap-2 rounded-sm p-2 text-left text-xs text-[#285943]"
+                                        >
+                                            <i data-lucide="party-popper" class="size-4"></i>
+                                            <span>Celebration</span>
+                                        </button>
+                                    </div>
 
-                        <input
-                            type="hidden"
-                            id="theme-selector"
-                            name="theme"
-                            value="romance"
-                        />
-                    </div>`
+                                    <input
+                                        type="hidden"
+                                        id="theme-selector"
+                                        name="theme"
+                                        value="romance"
+                                    />
+                                </div>
+                            `
                             : ""
                     }
                 </div>
